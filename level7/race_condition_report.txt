@@ -1,0 +1,34 @@
+
+=== Helgrind Race Condition Analysis ===
+Date: Wed Jan  8 06:59:51 PM IST 2025
+
+1. Race Condition Details:
+   - Global variable 'accum' is accessed by multiple threads
+   - No synchronization mechanism (mutex/lock) protecting accum
+   - Operation 'accum += x * x' is not atomic
+
+2. Helgrind Analysis:
+   Command used: valgrind --tool=helgrind ./race
+==27531== Possible data race during read of size 8 at 0x10C018 by thread #4
+==27531== Locks held: none
+==27531==    at 0x10920B: square(void*) (race.cpp:12)
+==27531==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==27531==    by 0x4907AC2: start_thread (pthread_create.c:442)
+==27531==    by 0x4998A03: clone (clone.S:100)
+--
+==27531== Possible data race during write of size 8 at 0x10C018 by thread #4
+==27531== Locks held: none
+==27531==    at 0x109215: square(void*) (race.cpp:12)
+==27531==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==27531==    by 0x4907AC2: start_thread (pthread_create.c:442)
+==27531==    by 0x4998A03: clone (clone.S:100)
+
+3. Impact:
+   - Multiple threads updating shared variable without synchronization
+   - Race condition can lead to incorrect final value of accum
+   - Results will be non-deterministic between runs
+
+4. Location:
+   - Function: square()
+   - Variable: accum (global)
+   - Operation: accum += x * x

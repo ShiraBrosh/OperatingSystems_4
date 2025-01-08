@@ -1,0 +1,42 @@
+=== Valgrind-GDB Integration Report ===
+=================================
+
+Program Analysis Details:
+1. Memory Error Detection:
+   - Line 15: Use of uninitialized variable 'string_so_far'
+   - Location: if(string_so_far != (char *)0)
+   - Impact: Could cause unpredictable behavior
+
+2. Memory Leaks Found:
+   - Leak of 'string' buffer allocated at Line 12
+   - No corresponding free() call found
+   - Size: variable based on input arguments
+
+3. Segmentation Fault Analysis:
+   - Occurred at strcat(string, argv[i])
+   - Caused by invalid memory access
+   - Related to uninitialized string_so_far
+
+4. Debugging Session Details:
+   - Successfully attached GDB to Valgrind process
+   - Breakpoint hit at main() function
+   - Step-by-step execution revealed:
+     * string_so_far used before initialization
+     * memory allocated but never freed
+     * program crashes on invalid memory access
+
+5. Valgrind-GDB Integration Commands Used:
+   valgrind --vgdb=yes --vgdb-error=0 ./hello
+   gdb ./hello
+   (gdb) target remote | vgdb
+   (gdb) break main
+   (gdb) continue
+   (gdb) next
+   (gdb) print string_so_far
+   (gdb) print string
+   (gdb) print length
+
+6. Conclusion:
+   Successfully demonstrated integration between Valgrind and GDB
+   Identified multiple memory-related issues in the code
+   Showed exact locations and nature of the problems

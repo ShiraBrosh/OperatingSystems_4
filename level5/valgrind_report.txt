@@ -1,0 +1,24 @@
+Valgrind Report for hello.cpp:
+
+1. **Uninitialized Value Usage:**
+   - Location: Line 15 (`if(string_so_far != (char *)0)`)
+   - Cause: Variable `string_so_far` is not initialized before being used.
+   - Effect: Conditional jump based on uninitialized value.
+
+2. **Invalid Memory Read:**
+   - Location: Line 18 (`strcat(string, argv[i]);`)
+   - Cause: Variable `string` is not properly initialized as an empty string (`\0`).
+   - Effect: Invalid memory read leads to segmentation fault.
+
+3. **Segmentation Fault:**
+   - Location: Line 18 (`strcat(string, argv[i]);`)
+   - Cause: Uninitialized or improperly allocated memory is used with `strcat`.
+   - Effect: Program crashes due to invalid memory access.
+
+4. **Heap Usage:**
+   - In Use at Exit: 72,728 bytes in 2 blocks.
+   - Cause: Allocated memory is not freed using `free`.
+   - Effect: Memory remains "still reachable" but not released to the system.
+
+Conclusion:
+The program contains multiple issues related to uninitialized variables, improper memory management, and lack of memory deallocation.
