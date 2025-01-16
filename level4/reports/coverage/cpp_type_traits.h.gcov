@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/cpp_type_traits.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// The  -*- C++ -*- type traits classes for internal use in libstdc++
         -:    2:
         -:    3:// Copyright (C) 2000-2021 Free Software Foundation, Inc.

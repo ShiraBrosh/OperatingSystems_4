@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/stl_bvector.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// vector<bool> specialization -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -78,8 +78,8 @@
         -:   74:    _Bit_type * _M_p;
         -:   75:    _Bit_type _M_mask;
         -:   76:
-       30:   77:    _Bit_reference(_Bit_type * __x, _Bit_type __y)
-       30:   78:    : _M_p(__x), _M_mask(__y) { }
+      120:   77:    _Bit_reference(_Bit_type * __x, _Bit_type __y)
+      120:   78:    : _M_p(__x), _M_mask(__y) { }
         -:   79:
         -:   80:    _Bit_reference() _GLIBCXX_NOEXCEPT : _M_p(0), _M_mask(0) { }
         -:   81:
@@ -87,17 +87,17 @@
         -:   83:    _Bit_reference(const _Bit_reference&) = default;
         -:   84:#endif
         -:   85:
-       25:   86:    operator bool() const _GLIBCXX_NOEXCEPT
-       25:   87:    { return !!(*_M_p & _M_mask); }
+      100:   86:    operator bool() const _GLIBCXX_NOEXCEPT
+      100:   87:    { return !!(*_M_p & _M_mask); }
         -:   88:
         -:   89:    _Bit_reference&
-        5:   90:    operator=(bool __x) _GLIBCXX_NOEXCEPT
+       20:   90:    operator=(bool __x) _GLIBCXX_NOEXCEPT
         -:   91:    {
-        5:   92:      if (__x)
-        5:   93:	*_M_p |= _M_mask;
+       20:   92:      if (__x)
+       20:   93:	*_M_p |= _M_mask;
         -:   94:      else
     #####:   95:	*_M_p &= ~_M_mask;
-        5:   96:      return *this;
+       20:   96:      return *this;
         -:   97:    }
         -:   98:
         -:   99:    _Bit_reference&
@@ -149,8 +149,8 @@
         -:  145:    _Bit_type * _M_p;
         -:  146:    unsigned int _M_offset;
         -:  147:
-       35:  148:    _Bit_iterator_base(_Bit_type * __x, unsigned int __y)
-       35:  149:    : _M_p(__x), _M_offset(__y) { }
+      140:  148:    _Bit_iterator_base(_Bit_type * __x, unsigned int __y)
+      140:  149:    : _M_p(__x), _M_offset(__y) { }
         -:  150:
         -:  151:    void
         -:  152:    _M_bump_up()
@@ -173,18 +173,18 @@
         -:  169:    }
         -:  170:
         -:  171:    void
-       31:  172:    _M_incr(ptrdiff_t __i)
+      124:  172:    _M_incr(ptrdiff_t __i)
         -:  173:    {
-       31:  174:      difference_type __n = __i + _M_offset;
-       31:  175:      _M_p += __n / int(_S_word_bit);
-       31:  176:      __n = __n % int(_S_word_bit);
-       31:  177:      if (__n < 0)
+      124:  174:      difference_type __n = __i + _M_offset;
+      124:  175:      _M_p += __n / int(_S_word_bit);
+      124:  176:      __n = __n % int(_S_word_bit);
+      124:  177:      if (__n < 0)
         -:  178:	{
     #####:  179:	  __n += int(_S_word_bit);
     #####:  180:	  --_M_p;
         -:  181:	}
-       31:  182:      _M_offset = static_cast<unsigned int>(__n);
-       31:  183:    }
+      124:  182:      _M_offset = static_cast<unsigned int>(__n);
+      124:  183:    }
         -:  184:
         -:  185:    friend _GLIBCXX20_CONSTEXPR bool
         -:  186:    operator==(const _Bit_iterator_base& __x, const _Bit_iterator_base& __y)
@@ -242,18 +242,18 @@
         -:  238:#endif
         -:  239:    typedef _Bit_iterator   iterator;
         -:  240:
-        4:  241:    _Bit_iterator() : _Bit_iterator_base(0, 0) { }
+       16:  241:    _Bit_iterator() : _Bit_iterator_base(0, 0) { }
         -:  242:
-       31:  243:    _Bit_iterator(_Bit_type * __x, unsigned int __y)
-       31:  244:    : _Bit_iterator_base(__x, __y) { }
+      124:  243:    _Bit_iterator(_Bit_type * __x, unsigned int __y)
+      124:  244:    : _Bit_iterator_base(__x, __y) { }
         -:  245:
         -:  246:    iterator
         -:  247:    _M_const_cast() const
         -:  248:    { return *this; }
         -:  249:
         -:  250:    reference
-       30:  251:    operator*() const
-       30:  252:    { return reference(_M_p, 1UL << _M_offset); }
+      120:  251:    operator*() const
+      120:  252:    { return reference(_M_p, 1UL << _M_offset); }
         -:  253:
         -:  254:    iterator&
         -:  255:    operator++()
@@ -286,10 +286,10 @@
         -:  282:    }
         -:  283:
         -:  284:    iterator&
-       31:  285:    operator+=(difference_type __i)
+      124:  285:    operator+=(difference_type __i)
         -:  286:    {
-       31:  287:      _M_incr(__i);
-       31:  288:      return *this;
+      124:  287:      _M_incr(__i);
+      124:  288:      return *this;
         -:  289:    }
         -:  290:
         -:  291:    iterator&
@@ -300,15 +300,15 @@
         -:  296:    }
         -:  297:
         -:  298:    reference
-       30:  299:    operator[](difference_type __i) const
-       30:  300:    { return *(*this + __i); }
+      120:  299:    operator[](difference_type __i) const
+      120:  300:    { return *(*this + __i); }
         -:  301:
         -:  302:    friend iterator
-       31:  303:    operator+(const iterator& __x, difference_type __n)
+      124:  303:    operator+(const iterator& __x, difference_type __n)
         -:  304:    {
-       31:  305:      iterator __tmp = __x;
-       31:  306:      __tmp += __n;
-       31:  307:      return __tmp;
+      124:  305:      iterator __tmp = __x;
+      124:  306:      __tmp += __n;
+      124:  307:      return __tmp;
         -:  308:    }
         -:  309:
         -:  310:    friend iterator
@@ -444,9 +444,9 @@
         -:  440:	_Bit_iterator	_M_finish;
         -:  441:	_Bit_pointer	_M_end_of_storage;
         -:  442:
-        2:  443:	_Bvector_impl_data() _GLIBCXX_NOEXCEPT
-        2:  444:	: _M_start(), _M_finish(), _M_end_of_storage()
-        2:  445:	{ }
+        8:  443:	_Bvector_impl_data() _GLIBCXX_NOEXCEPT
+        8:  444:	: _M_start(), _M_finish(), _M_end_of_storage()
+        8:  445:	{ }
         -:  446:
         -:  447:#if __cplusplus >= 201103L
         -:  448:	_Bvector_impl_data(const _Bvector_impl_data&) = default;
@@ -466,8 +466,8 @@
         -:  462:#endif
         -:  463:
         -:  464:	void
-        1:  465:	_M_reset() _GLIBCXX_NOEXCEPT
-        1:  466:	{ *this = _Bvector_impl_data(); }
+        4:  465:	_M_reset() _GLIBCXX_NOEXCEPT
+        4:  466:	{ *this = _Bvector_impl_data(); }
         -:  467:
         -:  468:	void
         -:  469:	_M_swap_data(_Bvector_impl_data& __x) _GLIBCXX_NOEXCEPT
@@ -486,9 +486,9 @@
         -:  482:	: _Bit_alloc_type()
         -:  483:	{ }
         -:  484:
-        1:  485:	_Bvector_impl(const _Bit_alloc_type& __a) _GLIBCXX_NOEXCEPT
-        1:  486:	: _Bit_alloc_type(__a)
-        1:  487:	{ }
+        4:  485:	_Bvector_impl(const _Bit_alloc_type& __a) _GLIBCXX_NOEXCEPT
+        4:  486:	: _Bit_alloc_type(__a)
+        4:  487:	{ }
         -:  488:
         -:  489:#if __cplusplus >= 201103L
         -:  490:	// Not defaulted, to enforce noexcept(true) even when
@@ -503,10 +503,10 @@
         -:  499:#endif
         -:  500:
         -:  501:	_Bit_type*
-        2:  502:	_M_end_addr() const _GLIBCXX_NOEXCEPT
+        8:  502:	_M_end_addr() const _GLIBCXX_NOEXCEPT
         -:  503:	{
-        2:  504:	  if (this->_M_end_of_storage)
-        2:  505:	    return std::__addressof(this->_M_end_of_storage[-1]) + 1;
+        8:  504:	  if (this->_M_end_of_storage)
+        8:  505:	    return std::__addressof(this->_M_end_of_storage[-1]) + 1;
     #####:  506:	  return 0;
         -:  507:	}
         -:  508:      };
@@ -532,8 +532,8 @@
         -:  528:      _Bvector_base() { }
         -:  529:#endif
         -:  530:
-        1:  531:      _Bvector_base(const allocator_type& __a)
-        1:  532:      : _M_impl(__a) { }
+        4:  531:      _Bvector_base(const allocator_type& __a)
+        4:  532:      : _M_impl(__a) { }
         -:  533:
         -:  534:#if __cplusplus >= 201103L
         -:  535:      _Bvector_base(_Bvector_base&&) = default;
@@ -543,28 +543,28 @@
         -:  539:      { }
         -:  540:#endif
         -:  541:
-        1:  542:      ~_Bvector_base()
-        1:  543:      { this->_M_deallocate(); }
+        4:  542:      ~_Bvector_base()
+        4:  543:      { this->_M_deallocate(); }
         -:  544:
         -:  545:    protected:
         -:  546:      _Bvector_impl _M_impl;
         -:  547:
         -:  548:      _Bit_pointer
-        1:  549:      _M_allocate(size_t __n)
-        1:  550:      { return _Bit_alloc_traits::allocate(_M_impl, _S_nword(__n)); }
+        4:  549:      _M_allocate(size_t __n)
+        4:  550:      { return _Bit_alloc_traits::allocate(_M_impl, _S_nword(__n)); }
         -:  551:
         -:  552:      void
-        1:  553:      _M_deallocate()
+        4:  553:      _M_deallocate()
         -:  554:      {
-        1:  555:	if (_M_impl._M_start._M_p)
+        4:  555:	if (_M_impl._M_start._M_p)
         -:  556:	  {
-        1:  557:	    const size_t __n = _M_impl._M_end_addr() - _M_impl._M_start._M_p;
-        1:  558:	    _Bit_alloc_traits::deallocate(_M_impl,
-        1:  559:					  _M_impl._M_end_of_storage - __n,
+        4:  557:	    const size_t __n = _M_impl._M_end_addr() - _M_impl._M_start._M_p;
+        4:  558:	    _Bit_alloc_traits::deallocate(_M_impl,
+        4:  559:					  _M_impl._M_end_of_storage - __n,
         -:  560:					  __n);
-        1:  561:	    _M_impl._M_reset();
+        4:  561:	    _M_impl._M_reset();
         -:  562:	  }
-        1:  563:      }
+        4:  563:      }
         -:  564:
         -:  565:#if __cplusplus >= 201103L
         -:  566:      void
@@ -573,8 +573,8 @@
         -:  569:#endif
         -:  570:
         -:  571:      static size_t
-        2:  572:      _S_nword(size_t __n)
-        2:  573:      { return (__n + int(_S_word_bit) - 1) / int(_S_word_bit); }
+        8:  572:      _S_nword(size_t __n)
+        8:  573:      { return (__n + int(_S_word_bit) - 1) / int(_S_word_bit); }
         -:  574:    };
         -:  575:
         -:  576:  /**
@@ -648,18 +648,18 @@
         -:  644:      : vector(__n, false, __a)
         -:  645:      { }
         -:  646:
-        1:  647:      vector(size_type __n, const bool& __value,
+        4:  647:      vector(size_type __n, const bool& __value,
         -:  648:	     const allocator_type& __a = allocator_type())
         -:  649:#else
         -:  650:      explicit
         -:  651:      vector(size_type __n, const bool& __value = bool(),
         -:  652:	     const allocator_type& __a = allocator_type())
         -:  653:#endif
-        1:  654:      : _Base(__a)
+        4:  654:      : _Base(__a)
         -:  655:      {
-        1:  656:	_M_initialize(__n);
-        1:  657:	_M_initialize_value(__value);
-        1:  658:      }
+        4:  656:	_M_initialize(__n);
+        4:  657:	_M_initialize_value(__value);
+        4:  658:      }
         -:  659:
         -:  660:      vector(const vector& __x)
         -:  661:      : _Base(_Bit_alloc_traits::_S_select_on_copy(__x._M_get_Bit_allocator()))
@@ -734,7 +734,7 @@
         -:  730:	}
         -:  731:#endif
         -:  732:
-        1:  733:      ~vector() _GLIBCXX_NOEXCEPT { }
+        4:  733:      ~vector() _GLIBCXX_NOEXCEPT { }
         -:  734:
         -:  735:      vector&
         -:  736:      operator=(const vector& __x)
@@ -832,8 +832,8 @@
         -:  828:#endif
         -:  829:
         -:  830:      iterator
-       30:  831:      begin() _GLIBCXX_NOEXCEPT
-       30:  832:      { return iterator(this->_M_impl._M_start._M_p, 0); }
+      120:  831:      begin() _GLIBCXX_NOEXCEPT
+      120:  832:      { return iterator(this->_M_impl._M_start._M_p, 0); }
         -:  833:
         -:  834:      const_iterator
         -:  835:      begin() const _GLIBCXX_NOEXCEPT
@@ -907,8 +907,8 @@
         -:  903:      { return begin() == end(); }
         -:  904:
         -:  905:      reference
-       30:  906:      operator[](size_type __n)
-       30:  907:      { return begin()[__n]; }
+      120:  906:      operator[](size_type __n)
+      120:  907:      { return begin()[__n]; }
         -:  908:
         -:  909:      const_reference
         -:  910:      operator[](size_type __n) const
@@ -1138,26 +1138,26 @@
         -: 1134:      }
         -: 1135:
         -: 1136:      void
-        1: 1137:      _M_initialize(size_type __n)
+        4: 1137:      _M_initialize(size_type __n)
         -: 1138:      {
-        1: 1139:	if (__n)
+        4: 1139:	if (__n)
         -: 1140:	  {
-        1: 1141:	    _Bit_pointer __q = this->_M_allocate(__n);
-        1: 1142:	    this->_M_impl._M_end_of_storage = __q + _S_nword(__n);
-        1: 1143:	    iterator __start = iterator(std::__addressof(*__q), 0);
-        1: 1144:	    this->_M_impl._M_start = __start;
-        1: 1145:	    this->_M_impl._M_finish = __start + difference_type(__n);
+        4: 1141:	    _Bit_pointer __q = this->_M_allocate(__n);
+        4: 1142:	    this->_M_impl._M_end_of_storage = __q + _S_nword(__n);
+        4: 1143:	    iterator __start = iterator(std::__addressof(*__q), 0);
+        4: 1144:	    this->_M_impl._M_start = __start;
+        4: 1145:	    this->_M_impl._M_finish = __start + difference_type(__n);
         -: 1146:	  }
-        1: 1147:      }
+        4: 1147:      }
         -: 1148:
         -: 1149:      void
-        1: 1150:      _M_initialize_value(bool __x)
+        4: 1150:      _M_initialize_value(bool __x)
         -: 1151:      {
-        1: 1152:	if (_Bit_type* __p = this->_M_impl._M_start._M_p)
-       1*: 1153:	  __builtin_memset(__p, __x ? ~0 : 0,
-        1: 1154:			   (this->_M_impl._M_end_addr() - __p)
+        4: 1152:	if (_Bit_type* __p = this->_M_impl._M_start._M_p)
+       4*: 1153:	  __builtin_memset(__p, __x ? ~0 : 0,
+        4: 1154:			   (this->_M_impl._M_end_addr() - __p)
         -: 1155:			   * sizeof(_Bit_type));
-        1: 1156:      }
+        4: 1156:      }
         -: 1157:
         -: 1158:      void
         -: 1159:      _M_reallocate(size_type __n);

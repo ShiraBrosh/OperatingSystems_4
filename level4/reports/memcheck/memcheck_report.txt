@@ -1,15 +1,74 @@
-==6095== Memcheck, a memory error detector
-==6095== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==6095== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==6095== Command: ./graph_program -v 5 -e 10 -s 42
-==6095== Parent PID: 6090
-==6095== 
-==6095== 
-==6095== HEAP SUMMARY:
-==6095==     in use at exit: 0 bytes in 0 blocks
-==6095==   total heap usage: 55 allocs, 55 frees, 246,001 bytes allocated
-==6095== 
-==6095== All heap blocks were freed -- no leaks are possible
-==6095== 
-==6095== For lists of detected and suppressed errors, rerun with: -s
-==6095== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==6605== Memcheck, a memory error detector
+==6605== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6605== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==6605== Command: ./graph_program -v 5 -e 10 -s 42
+==6605== Parent PID: 6600
+==6605== 
+==6605== 
+==6605== Process terminating with default action of signal 27 (SIGPROF)
+==6605==    at 0x4BD1A1A: __open_nocancel (open64_nocancel.c:39)
+==6605==    by 0x4BE056F: write_gmon (gmon.c:370)
+==6605==    by 0x4BE0DDE: _mcleanup (gmon.c:444)
+==6605==    by 0x4AFDA55: __cxa_finalize (cxa_finalize.c:83)
+==6605==    by 0x111A26: ??? (in /home/shirabrosh/OperatingSystems_4/level4/graph_program)
+==6605==    by 0x400624D: _dl_fini (dl-fini.c:142)
+==6605==    by 0x4AFD494: __run_exit_handlers (exit.c:113)
+==6605==    by 0x4AFD60F: exit (exit.c:143)
+==6605==    by 0x4AE1D96: (below main) (libc_start_call_main.h:74)
+==6605== 
+==6605== HEAP SUMMARY:
+==6605==     in use at exit: 243,552 bytes in 3 blocks
+==6605==   total heap usage: 53 allocs, 50 frees, 245,460 bytes allocated
+==6605== 
+==6605== 1,024 bytes in 1 blocks are still reachable in loss record 1 of 3
+==6605==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6605==    by 0x4B36BA3: _IO_file_doallocate (filedoalloc.c:101)
+==6605==    by 0x4B45CDF: _IO_doallocbuf (genops.c:347)
+==6605==    by 0x4B44F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+==6605==    by 0x4B436D4: _IO_new_file_xsputn (fileops.c:1243)
+==6605==    by 0x4B436D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==6605==    by 0x4B37FD6: fwrite (iofwrite.c:39)
+==6605==    by 0x49A8B64: std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==6605==    by 0x49A8EBA: std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==6605==    by 0x111D23: Graph::printGraph() const (Graph.cpp:47)
+==6605==    by 0x1134B3: main (Graph.cpp:191)
+==6605== 
+==6605== 72,704 bytes in 1 blocks are still reachable in loss record 2 of 3
+==6605==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6605==    by 0x4916939: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30)
+==6605==    by 0x400647D: call_init.part.0 (dl-init.c:70)
+==6605==    by 0x4006567: call_init (dl-init.c:33)
+==6605==    by 0x4006567: _dl_init (dl-init.c:117)
+==6605==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==6605==    by 0x6: ???
+==6605==    by 0x1FFF000082: ???
+==6605==    by 0x1FFF000092: ???
+==6605==    by 0x1FFF000095: ???
+==6605==    by 0x1FFF000097: ???
+==6605==    by 0x1FFF00009A: ???
+==6605==    by 0x1FFF00009D: ???
+==6605== 
+==6605== 169,824 bytes in 1 blocks are still reachable in loss record 3 of 3
+==6605==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6605==    by 0x4BE0C12: monstartup (gmon.c:153)
+==6605==    by 0x111960: __gmon_start__ (in /home/shirabrosh/OperatingSystems_4/level4/graph_program)
+==6605==    by 0x4848015: ??? (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6605==    by 0x4000D57: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==6605==    by 0x4006439: call_init.part.0 (dl-init.c:56)
+==6605==    by 0x40065F8: call_init (dl-init.c:33)
+==6605==    by 0x40065F8: _dl_init (dl-init.c:84)
+==6605==    by 0x40202C9: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==6605==    by 0x6: ???
+==6605==    by 0x1FFF000082: ???
+==6605==    by 0x1FFF000092: ???
+==6605==    by 0x1FFF000095: ???
+==6605== 
+==6605== LEAK SUMMARY:
+==6605==    definitely lost: 0 bytes in 0 blocks
+==6605==    indirectly lost: 0 bytes in 0 blocks
+==6605==      possibly lost: 0 bytes in 0 blocks
+==6605==    still reachable: 243,552 bytes in 3 blocks
+==6605==         suppressed: 0 bytes in 0 blocks
+==6605== 
+==6605== For lists of detected and suppressed errors, rerun with: -s
+==6605== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

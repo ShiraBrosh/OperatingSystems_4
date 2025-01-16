@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/allocated_ptr.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Guarded Allocation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2014-2021 Free Software Foundation, Inc.
@@ -54,9 +54,9 @@
         -:   50:      using value_type = typename allocator_traits<_Alloc>::value_type;
         -:   51:
         -:   52:      /// Take ownership of __ptr
-       40:   53:      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
-       40:   54:      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
-       40:   55:      { }
+      160:   53:      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
+      160:   54:      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
+      160:   55:      { }
         -:   56:
         -:   57:      /// Convert __ptr to allocator's pointer type and take ownership of it
         -:   58:      template<typename _Ptr,
@@ -72,18 +72,18 @@
         -:   68:      { __gd._M_ptr = nullptr; }
         -:   69:
         -:   70:      /// Deallocate the owned pointer
-       40:   71:      ~__allocated_ptr()
+      160:   71:      ~__allocated_ptr()
         -:   72:      {
-       40:   73:	if (_M_ptr != nullptr)
+      160:   73:	if (_M_ptr != nullptr)
     #####:   74:	  std::allocator_traits<_Alloc>::deallocate(*_M_alloc, _M_ptr, 1);
-       40:   75:      }
+      160:   75:      }
         -:   76:
         -:   77:      /// Release ownership of the owned pointer
         -:   78:      __allocated_ptr&
-       40:   79:      operator=(std::nullptr_t) noexcept
+      160:   79:      operator=(std::nullptr_t) noexcept
         -:   80:      {
-       40:   81:	_M_ptr = nullptr;
-       40:   82:	return *this;
+      160:   81:	_M_ptr = nullptr;
+      160:   82:	return *this;
         -:   83:      }
         -:   84:
         -:   85:      /// Get the address that the owned pointer refers to.

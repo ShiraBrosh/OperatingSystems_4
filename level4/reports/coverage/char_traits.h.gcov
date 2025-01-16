@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/char_traits.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Character Traits for use by standard string and iostream -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 1997-2021 Free Software Foundation, Inc.
@@ -291,7 +291,7 @@
         -:  287:#ifdef _GLIBCXX_HAVE_BUILTIN_IS_CONSTANT_EVALUATED
         -:  288:      (void) __s;
         -:  289:      // In constexpr contexts all strings should be constant.
-        3:  290:      return __builtin_is_constant_evaluated();
+       12:  290:      return __builtin_is_constant_evaluated();
         -:  291:#else
         -:  292:      while (__builtin_constant_p(*__s) && *__s)
         -:  293:	__s++;
@@ -394,13 +394,13 @@
         -:  390:      }
         -:  391:
         -:  392:      static _GLIBCXX17_CONSTEXPR size_t
-        3:  393:      length(const char_type* __s)
+       12:  393:      length(const char_type* __s)
         -:  394:      {
         -:  395:#if __cplusplus >= 201703L
-        3:  396:	if (__constant_string_p(__s))
+       12:  396:	if (__constant_string_p(__s))
     #####:  397:	  return __gnu_cxx::char_traits<char_type>::length(__s);
         -:  398:#endif
-        3:  399:	return __builtin_strlen(__s);
+       12:  399:	return __builtin_strlen(__s);
         -:  400:      }
         -:  401:
         -:  402:      static _GLIBCXX17_CONSTEXPR const char_type*

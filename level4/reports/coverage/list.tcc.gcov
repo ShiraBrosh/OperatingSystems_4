@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/list.tcc
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// List implementation (out of line) -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -67,24 +67,24 @@
         -:   63:
         -:   64:  template<typename _Tp, typename _Alloc>
         -:   65:    void
-       30:   66:    _List_base<_Tp, _Alloc>::
+      120:   66:    _List_base<_Tp, _Alloc>::
         -:   67:    _M_clear() _GLIBCXX_NOEXCEPT
         -:   68:    {
         -:   69:      typedef _List_node<_Tp>  _Node;
-       30:   70:      __detail::_List_node_base* __cur = _M_impl._M_node._M_next;
-       70:   71:      while (__cur != &_M_impl._M_node)
+      120:   70:      __detail::_List_node_base* __cur = _M_impl._M_node._M_next;
+      280:   71:      while (__cur != &_M_impl._M_node)
         -:   72:	{
-       40:   73:	  _Node* __tmp = static_cast<_Node*>(__cur);
-       40:   74:	  __cur = __tmp->_M_next;
-       40:   75:	  _Tp* __val = __tmp->_M_valptr();
+      160:   73:	  _Node* __tmp = static_cast<_Node*>(__cur);
+      160:   74:	  __cur = __tmp->_M_next;
+      160:   75:	  _Tp* __val = __tmp->_M_valptr();
         -:   76:#if __cplusplus >= 201103L
-       40:   77:	  _Node_alloc_traits::destroy(_M_get_Node_allocator(), __val);
+      160:   77:	  _Node_alloc_traits::destroy(_M_get_Node_allocator(), __val);
         -:   78:#else
         -:   79:	  _Tp_alloc_type(_M_get_Node_allocator()).destroy(__val);
         -:   80:#endif
-       40:   81:	  _M_put_node(__tmp);
+      160:   81:	  _M_put_node(__tmp);
         -:   82:	}
-       30:   83:    }
+      120:   83:    }
         -:   84:
         -:   85:#if __cplusplus >= 201103L
         -:   86:  template<typename _Tp, typename _Alloc>
@@ -332,39 +332,39 @@
         -:  328:
         -:  329:  template<typename _Tp, typename _Alloc>
         -:  330:    typename list<_Tp, _Alloc>::__remove_return_type
-       20:  331:    list<_Tp, _Alloc>::
+       80:  331:    list<_Tp, _Alloc>::
         -:  332:    remove(const value_type& __value)
         -:  333:    {
         -:  334:#if !_GLIBCXX_USE_CXX11_ABI
         -:  335:      size_type __removed __attribute__((__unused__)) = 0;
         -:  336:#endif
-       20:  337:      list __to_destroy(get_allocator());
-       20:  338:      iterator __first = begin();
-       20:  339:      iterator __last = end();
-       70:  340:      while (__first != __last)
+       80:  337:      list __to_destroy(get_allocator());
+       80:  338:      iterator __first = begin();
+       80:  339:      iterator __last = end();
+      280:  340:      while (__first != __last)
         -:  341:	{
-       50:  342:	  iterator __next = __first;
-       50:  343:	  ++__next;
-       50:  344:	  if (*__first == __value)
+      200:  342:	  iterator __next = __first;
+      200:  343:	  ++__next;
+      200:  344:	  if (*__first == __value)
         -:  345:	    {
         -:  346:	      // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  347:	      // 526. Is it undefined if a function in the standard changes
         -:  348:	      // in parameters?
-       20:  349:	      __to_destroy.splice(__to_destroy.begin(), *this, __first);
+       80:  349:	      __to_destroy.splice(__to_destroy.begin(), *this, __first);
         -:  350:#if !_GLIBCXX_USE_CXX11_ABI
         -:  351:	      _GLIBCXX20_ONLY( __removed++ );
         -:  352:#endif
         -:  353:	    }
         -:  354:
-       50:  355:	  __first = __next;
+      200:  355:	  __first = __next;
         -:  356:	}
         -:  357:
         -:  358:#if !_GLIBCXX_USE_CXX11_ABI
         -:  359:	return _GLIBCXX20_ONLY( __removed );
         -:  360:#else
-       20:  361:	return _GLIBCXX20_ONLY( __to_destroy.size() );
+       80:  361:	return _GLIBCXX20_ONLY( __to_destroy.size() );
         -:  362:#endif
-       20:  363:    }
+       80:  363:    }
         -:  364:
         -:  365:  template<typename _Tp, typename _Alloc>
         -:  366:    typename list<_Tp, _Alloc>::__remove_return_type

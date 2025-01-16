@@ -59,3 +59,11 @@ clean:
 	rm -rf reports
 
 .PHONY: all coverage profiling memcheck callgraph clean
+
+#how to run:
+#cd level4
+#make coverage - to generate coverage report
+#make profiling - to generate profiling report
+#make memcheck - to generate memcheck report
+#make callgraph - to generate callgraph report
+#make all_reports - to generate all reports

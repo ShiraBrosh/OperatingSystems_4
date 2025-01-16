@@ -74,3 +74,16 @@ clean:
 	rm -f $(TARGET) valgrind_debugger_report.txt
 
 .PHONY: clean valgrind_debug gdb_attach generate_report
+
+#how to run:
+#cd level6
+#make
+#./hello
+#make valgrind_debug - to run Valgrind with GDB support
+#in another terminal:
+#make gdb_attach - to attach GDB to Valgrind process
+#make generate_report - to generate a report on Valgrind-GDB integration
+
+
+#if two valgrind run togther :
+#killall -9 valgrind

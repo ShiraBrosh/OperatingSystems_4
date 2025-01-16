@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/stl_algo.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Algorithm implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -3877,7 +3877,7 @@
         -: 3873:  template<typename _InputIterator, typename _Tp>
         -: 3874:    _GLIBCXX20_CONSTEXPR
         -: 3875:    inline _InputIterator
-       25: 3876:    find(_InputIterator __first, _InputIterator __last,
+      100: 3876:    find(_InputIterator __first, _InputIterator __last,
         -: 3877:	 const _Tp& __val)
         -: 3878:    {
         -: 3879:      // concept requirements
@@ -3885,8 +3885,8 @@
         -: 3881:      __glibcxx_function_requires(_EqualOpConcept<
         -: 3882:		typename iterator_traits<_InputIterator>::value_type, _Tp>)
         -: 3883:      __glibcxx_requires_valid_range(__first, __last);
-       25: 3884:      return std::__find_if(__first, __last,
-       25: 3885:			    __gnu_cxx::__ops::__iter_equals_val(__val));
+      100: 3884:      return std::__find_if(__first, __last,
+      100: 3885:			    __gnu_cxx::__ops::__iter_equals_val(__val));
         -: 3886:    }
         -: 3887:
         -: 3888:  /**

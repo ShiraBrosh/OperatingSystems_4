@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/stl_stack.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Stack implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -163,8 +163,8 @@
         -:  159:#else
         -:  160:      template<typename _Seq = _Sequence, typename _Requires = typename
         -:  161:	       enable_if<is_default_constructible<_Seq>::value>::type>
-        1:  162:	stack()
-        1:  163:	: c() { }
+        4:  162:	stack()
+        4:  163:	: c() { }
         -:  164:
         -:  165:      explicit
         -:  166:      stack(const _Sequence& __c)
@@ -200,8 +200,8 @@
         -:  196:       *  Returns true if the %stack is empty.
         -:  197:       */
         -:  198:      _GLIBCXX_NODISCARD bool
-       22:  199:      empty() const
-       22:  200:      { return c.empty(); }
+       88:  199:      empty() const
+       88:  200:      { return c.empty(); }
         -:  201:
         -:  202:      /**  Returns the number of elements in the %stack.  */
         -:  203:      size_type
@@ -213,10 +213,10 @@
         -:  209:       *  element of the %stack.
         -:  210:       */
         -:  211:      reference
-       21:  212:      top()
+       84:  212:      top()
         -:  213:      {
         -:  214:	__glibcxx_requires_nonempty();
-       21:  215:	return c.back();
+       84:  215:	return c.back();
         -:  216:      }
         -:  217:
         -:  218:      /**
@@ -240,8 +240,8 @@
         -:  236:       *  underlying sequence.
         -:  237:       */
         -:  238:      void
-       11:  239:      push(const value_type& __x)
-       11:  240:      { c.push_back(__x); }
+       44:  239:      push(const value_type& __x)
+       44:  240:      { c.push_back(__x); }
         -:  241:
         -:  242:#if __cplusplus >= 201103L
         -:  243:      void
@@ -273,11 +273,11 @@
         -:  269:       *  called.
         -:  270:       */
         -:  271:      void
-       11:  272:      pop()
+       44:  272:      pop()
         -:  273:      {
         -:  274:	__glibcxx_requires_nonempty();
-       11:  275:	c.pop_back();
-       11:  276:      }
+       44:  275:	c.pop_back();
+       44:  276:      }
         -:  277:
         -:  278:#if __cplusplus >= 201103L
         -:  279:      void

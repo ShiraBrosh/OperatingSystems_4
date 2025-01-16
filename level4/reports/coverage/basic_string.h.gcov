@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/basic_string.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Components for manipulating sequences of characters -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 1997-2021 Free Software Foundation, Inc.
@@ -534,14 +534,14 @@
         -:  530:      // 3076. basic_string CTAD ambiguity
         -:  531:      template<typename = _RequireAllocator<_Alloc>>
         -:  532:#endif
-        3:  533:      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
-        3:  534:      : _M_dataplus(_M_local_data(), __a)
+       12:  533:      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+       12:  534:      : _M_dataplus(_M_local_data(), __a)
         -:  535:      {
-       3*:  536:	const _CharT* __end = __s ? __s + traits_type::length(__s)
+      12*:  536:	const _CharT* __end = __s ? __s + traits_type::length(__s)
         -:  537:	  // We just need a non-null pointer here to get an exception:
         -:  538:	  : reinterpret_cast<const _CharT*>(__alignof__(_CharT));
-        3:  539:	_M_construct(__s, __end, random_access_iterator_tag());
-        3:  540:      }
+       12:  539:	_M_construct(__s, __end, random_access_iterator_tag());
+       12:  540:      }
         -:  541:
         -:  542:      /**
         -:  543:       *  @brief  Construct string as multiple characters.
@@ -6620,9 +6620,9 @@
         -: 6616:#if _GLIBCXX_USE_C99_STDLIB
         -: 6617:  // 21.4 Numeric Conversions [string.conversions].
         -: 6618:  inline int
-        3: 6619:  stoi(const string& __str, size_t* __idx = 0, int __base = 10)
-        3: 6620:  { return __gnu_cxx::__stoa<long, int>(&std::strtol, "stoi", __str.c_str(),
-        3: 6621:					__idx, __base); }
+       12: 6619:  stoi(const string& __str, size_t* __idx = 0, int __base = 10)
+       12: 6620:  { return __gnu_cxx::__stoa<long, int>(&std::strtol, "stoi", __str.c_str(),
+       12: 6621:					__idx, __base); }
         -: 6622:
         -: 6623:  inline long
         -: 6624:  stol(const string& __str, size_t* __idx = 0, int __base = 10)

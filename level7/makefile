@@ -35,3 +35,10 @@ clean:
 	rm -f $(TARGET) race_condition_report.txt helgrind_output.txt
 
 .PHONY: clean helgrind
+
+
+#how to run:
+#cd level8
+#make
+#make helgrind
+#cat race_condition_report.txt - to see the results

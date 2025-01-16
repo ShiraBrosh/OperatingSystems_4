@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/vector.tcc
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Vector implementation (out of line) -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -427,7 +427,7 @@
         -:  423:  template<typename _Tp, typename _Alloc>
         -:  424:    template<typename... _Args>
         -:  425:      void
-        5:  426:      vector<_Tp, _Alloc>::
+       20:  426:      vector<_Tp, _Alloc>::
         -:  427:      _M_realloc_insert(iterator __position, _Args&&... __args)
         -:  428:#else
         -:  429:  template<typename _Tp, typename _Alloc>
@@ -437,12 +437,12 @@
         -:  433:#endif
         -:  434:    {
         -:  435:      const size_type __len =
-        5:  436:	_M_check_len(size_type(1), "vector::_M_realloc_insert");
-        5:  437:      pointer __old_start = this->_M_impl._M_start;
-        5:  438:      pointer __old_finish = this->_M_impl._M_finish;
-        5:  439:      const size_type __elems_before = __position - begin();
-        5:  440:      pointer __new_start(this->_M_allocate(__len));
-        5:  441:      pointer __new_finish(__new_start);
+       20:  436:	_M_check_len(size_type(1), "vector::_M_realloc_insert");
+       20:  437:      pointer __old_start = this->_M_impl._M_start;
+       20:  438:      pointer __old_finish = this->_M_impl._M_finish;
+       20:  439:      const size_type __elems_before = __position - begin();
+       20:  440:      pointer __new_start(this->_M_allocate(__len));
+       20:  441:      pointer __new_finish(__new_start);
         -:  442:      __try
         -:  443:	{
         -:  444:	  // The order of the three operations is dictated by the C++11
@@ -450,25 +450,25 @@
         -:  446:	  // to the existing vector.  This is an issue only for callers
         -:  447:	  // taking the element by lvalue ref (see last bullet of C++11
         -:  448:	  // [res.on.arguments]).
-        5:  449:	  _Alloc_traits::construct(this->_M_impl,
-        5:  450:				   __new_start + __elems_before,
+       20:  449:	  _Alloc_traits::construct(this->_M_impl,
+       20:  450:				   __new_start + __elems_before,
         -:  451:#if __cplusplus >= 201103L
         -:  452:				   std::forward<_Args>(__args)...);
         -:  453:#else
         -:  454:				   __x);
         -:  455:#endif
-        5:  456:	  __new_finish = pointer();
+       20:  456:	  __new_finish = pointer();
         -:  457:
         -:  458:#if __cplusplus >= 201103L
         -:  459:	  if _GLIBCXX17_CONSTEXPR (_S_use_relocate())
         -:  460:	    {
-        5:  461:	      __new_finish = _S_relocate(__old_start, __position.base(),
-        5:  462:					 __new_start, _M_get_Tp_allocator());
+       20:  461:	      __new_finish = _S_relocate(__old_start, __position.base(),
+       20:  462:					 __new_start, _M_get_Tp_allocator());
         -:  463:
-        5:  464:	      ++__new_finish;
+       20:  464:	      ++__new_finish;
         -:  465:
-        5:  466:	      __new_finish = _S_relocate(__position.base(), __old_finish,
-        5:  467:					 __new_finish, _M_get_Tp_allocator());
+       20:  466:	      __new_finish = _S_relocate(__position.base(), __old_finish,
+       20:  467:					 __new_finish, _M_get_Tp_allocator());
         -:  468:	    }
         -:  469:	  else
         -:  470:#endif
@@ -501,12 +501,12 @@
         -:  497:#endif
         -:  498:	std::_Destroy(__old_start, __old_finish, _M_get_Tp_allocator());
         -:  499:      _GLIBCXX_ASAN_ANNOTATE_REINIT;
-        5:  500:      _M_deallocate(__old_start,
-        5:  501:		    this->_M_impl._M_end_of_storage - __old_start);
-        5:  502:      this->_M_impl._M_start = __new_start;
-        5:  503:      this->_M_impl._M_finish = __new_finish;
-        5:  504:      this->_M_impl._M_end_of_storage = __new_start + __len;
-        5:  505:    }
+       20:  500:      _M_deallocate(__old_start,
+       20:  501:		    this->_M_impl._M_end_of_storage - __old_start);
+       20:  502:      this->_M_impl._M_start = __new_start;
+       20:  503:      this->_M_impl._M_finish = __new_finish;
+       20:  504:      this->_M_impl._M_end_of_storage = __new_start + __len;
+       20:  505:    }
         -:  506:
         -:  507:  template<typename _Tp, typename _Alloc>
         -:  508:    void
@@ -612,19 +612,19 @@
         -:  608:#if __cplusplus >= 201103L
         -:  609:  template<typename _Tp, typename _Alloc>
         -:  610:    void
-        1:  611:    vector<_Tp, _Alloc>::
+        4:  611:    vector<_Tp, _Alloc>::
         -:  612:    _M_default_append(size_type __n)
         -:  613:    {
-        1:  614:      if (__n != 0)
+        4:  614:      if (__n != 0)
         -:  615:	{
-        1:  616:	  const size_type __size = size();
-        1:  617:	  size_type __navail = size_type(this->_M_impl._M_end_of_storage
-        1:  618:					 - this->_M_impl._M_finish);
+        4:  616:	  const size_type __size = size();
+        4:  617:	  size_type __navail = size_type(this->_M_impl._M_end_of_storage
+        4:  618:					 - this->_M_impl._M_finish);
         -:  619:
-       1*:  620:	  if (__size > max_size() || __navail > max_size() - __size)
+       4*:  620:	  if (__size > max_size() || __navail > max_size() - __size)
     #####:  621:	    __builtin_unreachable();
         -:  622:
-        1:  623:	  if (__navail >= __n)
+        4:  623:	  if (__navail >= __n)
         -:  624:	    {
         -:  625:	      _GLIBCXX_ASAN_ANNOTATE_GROW(__n);
     #####:  626:	      this->_M_impl._M_finish =
@@ -635,22 +635,22 @@
         -:  631:	  else
         -:  632:	    {
         -:  633:	      const size_type __len =
-        1:  634:		_M_check_len(__n, "vector::_M_default_append");
-        1:  635:	      pointer __new_start(this->_M_allocate(__len));
+        4:  634:		_M_check_len(__n, "vector::_M_default_append");
+        4:  635:	      pointer __new_start(this->_M_allocate(__len));
         -:  636:	      if _GLIBCXX17_CONSTEXPR (_S_use_relocate())
         -:  637:		{
         -:  638:		  __try
         -:  639:		    {
-        1:  640:		      std::__uninitialized_default_n_a(__new_start + __size,
-        1:  641:			      __n, _M_get_Tp_allocator());
+        4:  640:		      std::__uninitialized_default_n_a(__new_start + __size,
+        4:  641:			      __n, _M_get_Tp_allocator());
         -:  642:		    }
     =====:  643:		  __catch(...)
         -:  644:		    {
     =====:  645:		      _M_deallocate(__new_start, __len);
     =====:  646:		      __throw_exception_again;
         -:  647:		    }
-        1:  648:		  _S_relocate(this->_M_impl._M_start, this->_M_impl._M_finish,
-        1:  649:			      __new_start, _M_get_Tp_allocator());
+        4:  648:		  _S_relocate(this->_M_impl._M_start, this->_M_impl._M_finish,
+        4:  649:			      __new_start, _M_get_Tp_allocator());
         -:  650:		}
         -:  651:	      else
         -:  652:		{
@@ -676,15 +676,15 @@
         -:  672:				_M_get_Tp_allocator());
         -:  673:		}
         -:  674:	      _GLIBCXX_ASAN_ANNOTATE_REINIT;
-        1:  675:	      _M_deallocate(this->_M_impl._M_start,
-        1:  676:			    this->_M_impl._M_end_of_storage
-        1:  677:			    - this->_M_impl._M_start);
-        1:  678:	      this->_M_impl._M_start = __new_start;
-        1:  679:	      this->_M_impl._M_finish = __new_start + __size + __n;
-        1:  680:	      this->_M_impl._M_end_of_storage = __new_start + __len;
+        4:  675:	      _M_deallocate(this->_M_impl._M_start,
+        4:  676:			    this->_M_impl._M_end_of_storage
+        4:  677:			    - this->_M_impl._M_start);
+        4:  678:	      this->_M_impl._M_start = __new_start;
+        4:  679:	      this->_M_impl._M_finish = __new_start + __size + __n;
+        4:  680:	      this->_M_impl._M_end_of_storage = __new_start + __len;
         -:  681:	    }
         -:  682:	}
-        1:  683:    }
+        4:  683:    }
         -:  684:
         -:  685:  template<typename _Tp, typename _Alloc>
         -:  686:    bool

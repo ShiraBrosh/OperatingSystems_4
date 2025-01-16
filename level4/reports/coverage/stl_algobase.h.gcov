@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/stl_algobase.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Core algorithmic facilities -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -231,14 +231,14 @@
         -:  227:  template<typename _Tp>
         -:  228:    _GLIBCXX14_CONSTEXPR
         -:  229:    inline const _Tp&
-       14:  230:    min(const _Tp& __a, const _Tp& __b)
+       56:  230:    min(const _Tp& __a, const _Tp& __b)
         -:  231:    {
         -:  232:      // concept requirements
         -:  233:      __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
         -:  234:      //return __b < __a ? __b : __a;
-       14:  235:      if (__b < __a)
+       56:  235:      if (__b < __a)
     #####:  236:	return __b;
-       14:  237:      return __a;
+       56:  237:      return __a;
         -:  238:    }
         -:  239:
         -:  240:  /**
@@ -255,14 +255,14 @@
         -:  251:  template<typename _Tp>
         -:  252:    _GLIBCXX14_CONSTEXPR
         -:  253:    inline const _Tp&
-        7:  254:    max(const _Tp& __a, const _Tp& __b)
+       28:  254:    max(const _Tp& __a, const _Tp& __b)
         -:  255:    {
         -:  256:      // concept requirements
         -:  257:      __glibcxx_function_requires(_LessThanComparableConcept<_Tp>)
         -:  258:      //return  __a < __b ? __b : __a;
-        7:  259:      if (__a < __b)
-        2:  260:	return __b;
-        5:  261:      return __a;
+       28:  259:      if (__a < __b)
+        8:  260:	return __b;
+       20:  261:      return __a;
         -:  262:    }
         -:  263:
         -:  264:  /**
@@ -314,9 +314,9 @@
         -:  310:  template<typename _Iterator>
         -:  311:    _GLIBCXX20_CONSTEXPR
         -:  312:    inline _Iterator
-      33*:  313:    __niter_base(_Iterator __it)
+     132*:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-      33*:  315:    { return __it; }
+     132*:  315:    { return __it; }
 ------------------
 _ZSt12__niter_baseIPPiET_S2_:
     #####:  313:    __niter_base(_Iterator __it)
@@ -324,14 +324,14 @@ _ZSt12__niter_baseIPPiET_S2_:
     #####:  315:    { return __it; }
 ------------------
 _ZSt12__niter_baseIPiET_S1_:
-       30:  313:    __niter_base(_Iterator __it)
+      120:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-       30:  315:    { return __it; }
+      120:  315:    { return __it; }
 ------------------
 _ZSt12__niter_baseIPNSt7__cxx114listIiSaIiEEEET_S5_:
-        3:  313:    __niter_base(_Iterator __it)
+       12:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-        3:  315:    { return __it; }
+       12:  315:    { return __it; }
 ------------------
         -:  316:
         -:  317:  template<typename _Ite, typename _Seq>
@@ -2066,12 +2066,12 @@ _ZSt12__niter_baseIPNSt7__cxx114listIiSaIiEEEET_S5_:
         -: 2046:  template<typename _InputIterator, typename _Predicate>
         -: 2047:    _GLIBCXX20_CONSTEXPR
         -: 2048:    inline _InputIterator
-       25: 2049:    __find_if(_InputIterator __first, _InputIterator __last,
+      100: 2049:    __find_if(_InputIterator __first, _InputIterator __last,
         -: 2050:	      _Predicate __pred, input_iterator_tag)
         -: 2051:    {
-       51: 2052:      while (__first != __last && !__pred(__first))
-       26: 2053:	++__first;
-       25: 2054:      return __first;
+      204: 2052:      while (__first != __last && !__pred(__first))
+      104: 2053:	++__first;
+      100: 2054:      return __first;
         -: 2055:    }
         -: 2056:
         -: 2057:  /// This is an overload used by find algos for the RAI case.
@@ -2129,10 +2129,10 @@ _ZSt12__niter_baseIPNSt7__cxx114listIiSaIiEEEET_S5_:
         -: 2109:  template<typename _Iterator, typename _Predicate>
         -: 2110:    _GLIBCXX20_CONSTEXPR
         -: 2111:    inline _Iterator
-       25: 2112:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
+      100: 2112:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
         -: 2113:    {
-       25: 2114:      return __find_if(__first, __last, __pred,
-       25: 2115:		       std::__iterator_category(__first));
+      100: 2114:      return __find_if(__first, __last, __pred,
+      100: 2115:		       std::__iterator_category(__first));
         -: 2116:    }
         -: 2117:
         -: 2118:  template<typename _InputIterator, typename _Predicate>

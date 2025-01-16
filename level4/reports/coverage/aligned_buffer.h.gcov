@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/ext/aligned_buffer.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Aligned memory buffer -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2013-2021 Free Software Foundation, Inc.
@@ -65,20 +65,20 @@
         -:   61:      __aligned_membuf(std::nullptr_t) { }
         -:   62:
         -:   63:      void*
-      221:   64:      _M_addr() noexcept
-      221:   65:      { return static_cast<void*>(&_M_storage); }
+      884:   64:      _M_addr() noexcept
+      884:   65:      { return static_cast<void*>(&_M_storage); }
         -:   66:
         -:   67:      const void*
-       40:   68:      _M_addr() const noexcept
-       40:   69:      { return static_cast<const void*>(&_M_storage); }
+      160:   68:      _M_addr() const noexcept
+      160:   69:      { return static_cast<const void*>(&_M_storage); }
         -:   70:
         -:   71:      _Tp*
-      221:   72:      _M_ptr() noexcept
-      221:   73:      { return static_cast<_Tp*>(_M_addr()); }
+      884:   72:      _M_ptr() noexcept
+      884:   73:      { return static_cast<_Tp*>(_M_addr()); }
         -:   74:
         -:   75:      const _Tp*
-       40:   76:      _M_ptr() const noexcept
-       40:   77:      { return static_cast<const _Tp*>(_M_addr()); }
+      160:   76:      _M_ptr() const noexcept
+      160:   77:      { return static_cast<const _Tp*>(_M_addr()); }
         -:   78:    };
         -:   79:
         -:   80:#if _GLIBCXX_INLINE_VERSION

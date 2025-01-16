@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/ext/string_conversions.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// String Conversions -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2008-2021 Free Software Foundation, Inc.
@@ -55,7 +55,7 @@
         -:   51:  template<typename _TRet, typename _Ret = _TRet, typename _CharT,
         -:   52:	   typename... _Base>
         -:   53:    _Ret
-        3:   54:    __stoa(_TRet (*__convf) (const _CharT*, _CharT**, _Base...),
+       12:   54:    __stoa(_TRet (*__convf) (const _CharT*, _CharT**, _Base...),
         -:   55:	   const char* __name, const _CharT* __str, std::size_t* __idx,
         -:   56:	   _Base... __base)
         -:   57:    {
@@ -64,38 +64,38 @@
         -:   60:      _CharT* __endptr;
         -:   61:
         -:   62:      struct _Save_errno {
-        3:   63:	_Save_errno() : _M_errno(errno) { errno = 0; }
-        3:   64:	~_Save_errno() { if (errno == 0) errno = _M_errno; }
+       12:   63:	_Save_errno() : _M_errno(errno) { errno = 0; }
+       12:   64:	~_Save_errno() { if (errno == 0) errno = _M_errno; }
         -:   65:	int _M_errno;
-        3:   66:      } const __save_errno;
+       12:   66:      } const __save_errno;
         -:   67:
         -:   68:      struct _Range_chk {
         -:   69:	  static bool
         -:   70:	  _S_chk(_TRet, std::false_type) { return false; }
         -:   71:
         -:   72:	  static bool
-        3:   73:	  _S_chk(_TRet __val, std::true_type) // only called when _Ret is int
+       12:   73:	  _S_chk(_TRet __val, std::true_type) // only called when _Ret is int
         -:   74:	  {
         -:   75:	    return __val < _TRet(__numeric_traits<int>::__min)
-       3*:   76:	      || __val > _TRet(__numeric_traits<int>::__max);
+      12*:   76:	      || __val > _TRet(__numeric_traits<int>::__max);
         -:   77:	  }
         -:   78:      };
         -:   79:
-        3:   80:      const _TRet __tmp = __convf(__str, &__endptr, __base...);
+       12:   80:      const _TRet __tmp = __convf(__str, &__endptr, __base...);
         -:   81:
-        3:   82:      if (__endptr == __str)
+       12:   82:      if (__endptr == __str)
     #####:   83:	std::__throw_invalid_argument(__name);
-        6:   84:      else if (errno == ERANGE
-       3*:   85:	  || _Range_chk::_S_chk(__tmp, std::is_same<_Ret, int>{}))
+       24:   84:      else if (errno == ERANGE
+      12*:   85:	  || _Range_chk::_S_chk(__tmp, std::is_same<_Ret, int>{}))
     #####:   86:	std::__throw_out_of_range(__name);
         -:   87:      else
-        3:   88:	__ret = __tmp;
+       12:   88:	__ret = __tmp;
         -:   89:
-        3:   90:      if (__idx)
+       12:   90:      if (__idx)
     #####:   91:	*__idx = __endptr - __str;
         -:   92:
-        3:   93:      return __ret;
-        3:   94:    }
+       12:   93:      return __ret;
+       12:   94:    }
         -:   95:
         -:   96:  // Helper for the to_string / to_wstring functions.
         -:   97:  template<typename _String, typename _CharT = typename _String::value_type>

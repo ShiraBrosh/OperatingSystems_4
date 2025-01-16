@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/new
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// The -*- C++ -*- dynamic memory management header.
         -:    2:
         -:    3:// Copyright (C) 1994-2021 Free Software Foundation, Inc.
@@ -175,8 +175,8 @@
         -:  171:#endif // __cpp_aligned_new
         -:  172:
         -:  173:// Default placement versions of operator new.
-       72:  174:_GLIBCXX_NODISCARD inline void* operator new(std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
-       72:  175:{ return __p; }
+      288:  174:_GLIBCXX_NODISCARD inline void* operator new(std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
+      288:  175:{ return __p; }
         -:  176:_GLIBCXX_NODISCARD inline void* operator new[](std::size_t, void* __p) _GLIBCXX_USE_NOEXCEPT
         -:  177:{ return __p; }
         -:  178:

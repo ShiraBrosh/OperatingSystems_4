@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/stl_construct.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// nonstandard construct and destroy functions -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -110,7 +110,7 @@
         -:  106:  template<typename _Tp, typename... _Args>
         -:  107:    _GLIBCXX20_CONSTEXPR
         -:  108:    inline void
-       10:  109:    _Construct(_Tp* __p, _Args&&... __args)
+       40:  109:    _Construct(_Tp* __p, _Args&&... __args)
         -:  110:    {
         -:  111:#if __cplusplus >= 202002L && __has_builtin(__builtin_is_constant_evaluated)
         -:  112:      if (__builtin_is_constant_evaluated())
@@ -120,11 +120,11 @@
         -:  116:	  return;
         -:  117:	}
         -:  118:#endif
-       10:  119:      ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
-       10:  120:    }
+       40:  119:      ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
+       40:  120:    }
 ------------------
 _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJEEvPT_DpOT0_:
-        5:  109:    _Construct(_Tp* __p, _Args&&... __args)
+       20:  109:    _Construct(_Tp* __p, _Args&&... __args)
         -:  110:    {
         -:  111:#if __cplusplus >= 202002L && __has_builtin(__builtin_is_constant_evaluated)
         -:  112:      if (__builtin_is_constant_evaluated())
@@ -134,11 +134,11 @@ _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJEEvPT_DpOT0_:
         -:  116:	  return;
         -:  117:	}
         -:  118:#endif
-        5:  119:      ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
-        5:  120:    }
+       20:  119:      ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
+       20:  120:    }
 ------------------
 _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJRKS3_EEvPT_DpOT0_:
-        5:  109:    _Construct(_Tp* __p, _Args&&... __args)
+       20:  109:    _Construct(_Tp* __p, _Args&&... __args)
         -:  110:    {
         -:  111:#if __cplusplus >= 202002L && __has_builtin(__builtin_is_constant_evaluated)
         -:  112:      if (__builtin_is_constant_evaluated())
@@ -148,8 +148,8 @@ _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJRKS3_EEvPT_DpOT0_:
         -:  116:	  return;
         -:  117:	}
         -:  118:#endif
-        5:  119:      ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
-        5:  120:    }
+       20:  119:      ::new((void*)__p) _Tp(std::forward<_Args>(__args)...);
+       20:  120:    }
 ------------------
         -:  121:#else
         -:  122:  template<typename _T1, typename _T2>
@@ -176,25 +176,25 @@ _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJRKS3_EEvPT_DpOT0_:
         -:  143:   */
         -:  144:  template<typename _Tp>
         -:  145:    _GLIBCXX14_CONSTEXPR inline void
-       10:  146:    _Destroy(_Tp* __pointer)
+       40:  146:    _Destroy(_Tp* __pointer)
         -:  147:    {
         -:  148:#if __cplusplus > 201703L
         -:  149:      std::destroy_at(__pointer);
         -:  150:#else
-       10:  151:      __pointer->~_Tp();
+       40:  151:      __pointer->~_Tp();
         -:  152:#endif
-       10:  153:    }
+       40:  153:    }
         -:  154:
         -:  155:  template<bool>
         -:  156:    struct _Destroy_aux
         -:  157:    {
         -:  158:      template<typename _ForwardIterator>
         -:  159:	static _GLIBCXX20_CONSTEXPR void
-        2:  160:	__destroy(_ForwardIterator __first, _ForwardIterator __last)
+        8:  160:	__destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  161:	{
-       12:  162:	  for (; __first != __last; ++__first)
-       10:  163:	    std::_Destroy(std::__addressof(*__first));
-        2:  164:	}
+       48:  162:	  for (; __first != __last; ++__first)
+       40:  163:	    std::_Destroy(std::__addressof(*__first));
+        8:  164:	}
         -:  165:    };
         -:  166:
         -:  167:  template<>
@@ -202,7 +202,7 @@ _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJRKS3_EEvPT_DpOT0_:
         -:  169:    {
         -:  170:      template<typename _ForwardIterator>
         -:  171:        static void
-        1:  172:        __destroy(_ForwardIterator, _ForwardIterator) { }
+        4:  172:        __destroy(_ForwardIterator, _ForwardIterator) { }
         -:  173:    };
         -:  174:
         -:  175:  /**
@@ -212,7 +212,7 @@ _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJRKS3_EEvPT_DpOT0_:
         -:  179:   */
         -:  180:  template<typename _ForwardIterator>
         -:  181:    _GLIBCXX20_CONSTEXPR inline void
-        3:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+       12:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  183:    {
         -:  184:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  185:                       _Value_type;
@@ -226,11 +226,11 @@ _ZSt10_ConstructINSt7__cxx114listIiSaIiEEEJRKS3_EEvPT_DpOT0_:
         -:  193:	return _Destroy_aux<false>::__destroy(__first, __last);
         -:  194:#endif
         -:  195:      std::_Destroy_aux<__has_trivial_destructor(_Value_type)>::
-        3:  196:	__destroy(__first, __last);
-        3:  197:    }
+       12:  196:	__destroy(__first, __last);
+       12:  197:    }
 ------------------
 _ZSt8_DestroyIPiEvT_S1_:
-        1:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+        4:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  183:    {
         -:  184:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  185:                       _Value_type;
@@ -244,11 +244,11 @@ _ZSt8_DestroyIPiEvT_S1_:
         -:  193:	return _Destroy_aux<false>::__destroy(__first, __last);
         -:  194:#endif
         -:  195:      std::_Destroy_aux<__has_trivial_destructor(_Value_type)>::
-        1:  196:	__destroy(__first, __last);
-        1:  197:    }
+        4:  196:	__destroy(__first, __last);
+        4:  197:    }
 ------------------
 _ZSt8_DestroyIPNSt7__cxx114listIiSaIiEEEEvT_S5_:
-        2:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+        8:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  183:    {
         -:  184:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  185:                       _Value_type;
@@ -262,8 +262,8 @@ _ZSt8_DestroyIPNSt7__cxx114listIiSaIiEEEEvT_S5_:
         -:  193:	return _Destroy_aux<false>::__destroy(__first, __last);
         -:  194:#endif
         -:  195:      std::_Destroy_aux<__has_trivial_destructor(_Value_type)>::
-        2:  196:	__destroy(__first, __last);
-        2:  197:    }
+        8:  196:	__destroy(__first, __last);
+        8:  197:    }
 ------------------
         -:  198:
         -:  199:  template<bool>

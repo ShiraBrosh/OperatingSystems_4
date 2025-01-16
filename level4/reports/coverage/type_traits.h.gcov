@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/ext/type_traits.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2005-2021 Free Software Foundation, Inc.
@@ -153,8 +153,8 @@
         -:  149:  // For use in string and vstring.
         -:  150:  template<typename _Type>
         -:  151:    inline bool
-        3:  152:    __is_null_pointer(_Type* __ptr)
-        3:  153:    { return __ptr == 0; }
+       12:  152:    __is_null_pointer(_Type* __ptr)
+       12:  153:    { return __ptr == 0; }
         -:  154:
         -:  155:  template<typename _Type>
         -:  156:    inline bool

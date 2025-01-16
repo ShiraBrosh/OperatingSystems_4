@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/stl_list.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// List implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -111,8 +111,8 @@
         -:  107:      std::size_t _M_size;
         -:  108:#endif
         -:  109:
-       30:  110:      _List_node_header() _GLIBCXX_NOEXCEPT
-       30:  111:      { _M_init(); }
+      120:  110:      _List_node_header() _GLIBCXX_NOEXCEPT
+      120:  111:      { _M_init(); }
         -:  112:
         -:  113:#if __cplusplus >= 201103L
     #####:  114:      _List_node_header(_List_node_header&& __x) noexcept
@@ -151,13 +151,13 @@
         -:  147:#endif
         -:  148:
         -:  149:      void
-       30:  150:      _M_init() _GLIBCXX_NOEXCEPT
+      120:  150:      _M_init() _GLIBCXX_NOEXCEPT
         -:  151:      {
-       30:  152:	this->_M_next = this->_M_prev = this;
+      120:  152:	this->_M_next = this->_M_prev = this;
         -:  153:#if _GLIBCXX_USE_CXX11_ABI
-       30:  154:	this->_M_size = 0;
+      120:  154:	this->_M_size = 0;
         -:  155:#endif
-       30:  156:      }
+      120:  156:      }
         -:  157:
         -:  158:    private:
     #####:  159:      _List_node_base* _M_base() { return this; }
@@ -172,8 +172,8 @@
         -:  168:    {
         -:  169:#if __cplusplus >= 201103L
         -:  170:      __gnu_cxx::__aligned_membuf<_Tp> _M_storage;
-      221:  171:      _Tp*       _M_valptr()       { return _M_storage._M_ptr(); }
-       40:  172:      _Tp const* _M_valptr() const { return _M_storage._M_ptr(); }
+      884:  171:      _Tp*       _M_valptr()       { return _M_storage._M_ptr(); }
+      160:  172:      _Tp const* _M_valptr() const { return _M_storage._M_ptr(); }
         -:  173:#else
         -:  174:      _Tp _M_data;
         -:  175:      _Tp*       _M_valptr()       { return std::__addressof(_M_data); }
@@ -202,8 +202,8 @@
         -:  198:      : _M_node() { }
         -:  199:
         -:  200:      explicit
-      275:  201:      _List_iterator(__detail::_List_node_base* __x) _GLIBCXX_NOEXCEPT
-      275:  202:      : _M_node(__x) { }
+     1100:  201:      _List_iterator(__detail::_List_node_base* __x) _GLIBCXX_NOEXCEPT
+     1100:  202:      : _M_node(__x) { }
         -:  203:
         -:  204:      _Self
         -:  205:      _M_const_cast() const _GLIBCXX_NOEXCEPT
@@ -211,18 +211,18 @@
         -:  207:
         -:  208:      // Must downcast from _List_node_base to _List_node to get to value.
         -:  209:      reference
-      141:  210:      operator*() const _GLIBCXX_NOEXCEPT
-      141:  211:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
+      564:  210:      operator*() const _GLIBCXX_NOEXCEPT
+      564:  211:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
         -:  212:
         -:  213:      pointer
         -:  214:      operator->() const _GLIBCXX_NOEXCEPT
         -:  215:      { return static_cast<_Node*>(_M_node)->_M_valptr(); }
         -:  216:
         -:  217:      _Self&
-      116:  218:      operator++() _GLIBCXX_NOEXCEPT
+      464:  218:      operator++() _GLIBCXX_NOEXCEPT
         -:  219:      {
-      116:  220:	_M_node = _M_node->_M_next;
-      116:  221:	return *this;
+      464:  220:	_M_node = _M_node->_M_next;
+      464:  221:	return *this;
         -:  222:      }
         -:  223:
         -:  224:      _Self
@@ -234,10 +234,10 @@
         -:  230:      }
         -:  231:
         -:  232:      _Self&
-       20:  233:      operator--() _GLIBCXX_NOEXCEPT
+       80:  233:      operator--() _GLIBCXX_NOEXCEPT
         -:  234:      {
-       20:  235:	_M_node = _M_node->_M_prev;
-       20:  236:	return *this;
+       80:  235:	_M_node = _M_node->_M_prev;
+       80:  236:	return *this;
         -:  237:      }
         -:  238:
         -:  239:      _Self
@@ -249,13 +249,13 @@
         -:  245:      }
         -:  246:
         -:  247:      friend bool
-       25:  248:      operator==(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
-       25:  249:      { return __x._M_node == __y._M_node; }
+      100:  248:      operator==(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
+      100:  249:      { return __x._M_node == __y._M_node; }
         -:  250:
         -:  251:#if __cpp_impl_three_way_comparison < 201907L
         -:  252:      friend bool
-      146:  253:      operator!=(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
-      146:  254:      { return __x._M_node != __y._M_node; }
+      584:  253:      operator!=(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
+      584:  254:      { return __x._M_node != __y._M_node; }
         -:  255:#endif
         -:  256:
         -:  257:      // The only member points to the %list element.
@@ -284,31 +284,31 @@
         -:  280:      : _M_node() { }
         -:  281:
         -:  282:      explicit
-       20:  283:      _List_const_iterator(const __detail::_List_node_base* __x)
+       80:  283:      _List_const_iterator(const __detail::_List_node_base* __x)
         -:  284:      _GLIBCXX_NOEXCEPT
-       20:  285:      : _M_node(__x) { }
+       80:  285:      : _M_node(__x) { }
         -:  286:
-       60:  287:      _List_const_iterator(const iterator& __x) _GLIBCXX_NOEXCEPT
-       60:  288:      : _M_node(__x._M_node) { }
+      240:  287:      _List_const_iterator(const iterator& __x) _GLIBCXX_NOEXCEPT
+      240:  288:      : _M_node(__x._M_node) { }
         -:  289:
         -:  290:      iterator
-       60:  291:      _M_const_cast() const _GLIBCXX_NOEXCEPT
-       60:  292:      { return iterator(const_cast<__detail::_List_node_base*>(_M_node)); }
+      240:  291:      _M_const_cast() const _GLIBCXX_NOEXCEPT
+      240:  292:      { return iterator(const_cast<__detail::_List_node_base*>(_M_node)); }
         -:  293:
         -:  294:      // Must downcast from List_node_base to _List_node to get to value.
         -:  295:      reference
-       40:  296:      operator*() const _GLIBCXX_NOEXCEPT
-       40:  297:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
+      160:  296:      operator*() const _GLIBCXX_NOEXCEPT
+      160:  297:      { return *static_cast<_Node*>(_M_node)->_M_valptr(); }
         -:  298:
         -:  299:      pointer
         -:  300:      operator->() const _GLIBCXX_NOEXCEPT
         -:  301:      { return static_cast<_Node*>(_M_node)->_M_valptr(); }
         -:  302:
         -:  303:      _Self&
-       40:  304:      operator++() _GLIBCXX_NOEXCEPT
+      160:  304:      operator++() _GLIBCXX_NOEXCEPT
         -:  305:      {
-       40:  306:	_M_node = _M_node->_M_next;
-       40:  307:	return *this;
+      160:  306:	_M_node = _M_node->_M_next;
+      160:  307:	return *this;
         -:  308:      }
         -:  309:
         -:  310:      _Self
@@ -335,13 +335,13 @@
         -:  331:      }
         -:  332:
         -:  333:      friend bool
-       40:  334:      operator==(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
-       40:  335:      { return __x._M_node == __y._M_node; }
+      160:  334:      operator==(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
+      160:  335:      { return __x._M_node == __y._M_node; }
         -:  336:
         -:  337:#if __cpp_impl_three_way_comparison < 201907L
         -:  338:      friend bool
-       50:  339:      operator!=(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
-       50:  340:      { return __x._M_node != __y._M_node; }
+      200:  339:      operator!=(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
+      200:  340:      { return __x._M_node != __y._M_node; }
         -:  341:#endif
         -:  342:
         -:  343:      // The only member points to the %list element.
@@ -381,10 +381,10 @@
         -:  377:      {
         -:  378:	__detail::_List_node_header _M_node;
         -:  379:
-        5:  380:	_List_impl() _GLIBCXX_NOEXCEPT_IF(
+       20:  380:	_List_impl() _GLIBCXX_NOEXCEPT_IF(
         -:  381:	    is_nothrow_default_constructible<_Node_alloc_type>::value)
-        5:  382:	: _Node_alloc_type()
-        5:  383:	{ }
+       20:  382:	: _Node_alloc_type()
+       20:  383:	{ }
         -:  384:
         -:  385:	_List_impl(const _Node_alloc_type& __a) _GLIBCXX_NOEXCEPT
         -:  386:	: _Node_alloc_type(__a)
@@ -397,22 +397,22 @@
         -:  393:	: _Node_alloc_type(std::move(__a)), _M_node(std::move(__x._M_node))
         -:  394:	{ }
         -:  395:
-       25:  396:	_List_impl(_Node_alloc_type&& __a) noexcept
-       25:  397:	: _Node_alloc_type(std::move(__a))
-       25:  398:	{ }
+      100:  396:	_List_impl(_Node_alloc_type&& __a) noexcept
+      100:  397:	: _Node_alloc_type(std::move(__a))
+      100:  398:	{ }
         -:  399:#endif
         -:  400:      };
         -:  401:
         -:  402:      _List_impl _M_impl;
         -:  403:
         -:  404:#if _GLIBCXX_USE_CXX11_ABI
-        5:  405:      size_t _M_get_size() const { return _M_impl._M_node._M_size; }
+       20:  405:      size_t _M_get_size() const { return _M_impl._M_node._M_size; }
         -:  406:
         -:  407:      void _M_set_size(size_t __n) { _M_impl._M_node._M_size = __n; }
         -:  408:
-       60:  409:      void _M_inc_size(size_t __n) { _M_impl._M_node._M_size += __n; }
+      240:  409:      void _M_inc_size(size_t __n) { _M_impl._M_node._M_size += __n; }
         -:  410:
-       20:  411:      void _M_dec_size(size_t __n) { _M_impl._M_node._M_size -= __n; }
+       80:  411:      void _M_dec_size(size_t __n) { _M_impl._M_node._M_size -= __n; }
         -:  412:
         -:  413:# if !_GLIBCXX_INLINE_VERSION
         -:  414:      size_t
@@ -443,26 +443,26 @@
         -:  439:#endif
         -:  440:
         -:  441:      typename _Node_alloc_traits::pointer
-       40:  442:      _M_get_node()
-       40:  443:      { return _Node_alloc_traits::allocate(_M_impl, 1); }
+      160:  442:      _M_get_node()
+      160:  443:      { return _Node_alloc_traits::allocate(_M_impl, 1); }
         -:  444:
         -:  445:      void
-       40:  446:      _M_put_node(typename _Node_alloc_traits::pointer __p) _GLIBCXX_NOEXCEPT
-       40:  447:      { _Node_alloc_traits::deallocate(_M_impl, __p, 1); }
+      160:  446:      _M_put_node(typename _Node_alloc_traits::pointer __p) _GLIBCXX_NOEXCEPT
+      160:  447:      { _Node_alloc_traits::deallocate(_M_impl, __p, 1); }
         -:  448:
         -:  449:  public:
         -:  450:      typedef _Alloc allocator_type;
         -:  451:
         -:  452:      _Node_alloc_type&
-      120:  453:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
-      120:  454:      { return _M_impl; }
+      480:  453:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+      480:  454:      { return _M_impl; }
         -:  455:
         -:  456:      const _Node_alloc_type&
-       25:  457:      _M_get_Node_allocator() const _GLIBCXX_NOEXCEPT
-       25:  458:      { return _M_impl; }
+      100:  457:      _M_get_Node_allocator() const _GLIBCXX_NOEXCEPT
+      100:  458:      { return _M_impl; }
         -:  459:
         -:  460:#if __cplusplus >= 201103L
-        5:  461:      _List_base() = default;
+       20:  461:      _List_base() = default;
         -:  462:#else
         -:  463:      _List_base() { }
         -:  464:#endif
@@ -490,9 +490,9 @@
         -:  486:      { }
         -:  487:
         -:  488:      // Used when allocator !is_always_equal.
-       25:  489:      _List_base(_Node_alloc_type&& __a)
-       25:  490:      : _M_impl(std::move(__a))
-       25:  491:      { }
+      100:  489:      _List_base(_Node_alloc_type&& __a)
+      100:  490:      : _M_impl(std::move(__a))
+      100:  491:      { }
         -:  492:
         -:  493:      void
         -:  494:      _M_move_nodes(_List_base&& __x)
@@ -500,8 +500,8 @@
         -:  496:#endif
         -:  497:
         -:  498:      // This is what actually destroys the list.
-       30:  499:      ~_List_base() _GLIBCXX_NOEXCEPT
-       30:  500:      { _M_clear(); }
+      120:  499:      ~_List_base() _GLIBCXX_NOEXCEPT
+      120:  500:      { _M_clear(); }
         -:  501:
         -:  502:      void
         -:  503:      _M_clear() _GLIBCXX_NOEXCEPT;
@@ -634,16 +634,16 @@
         -:  630:#else
         -:  631:      template<typename... _Args>
         -:  632:	_Node*
-       40:  633:	_M_create_node(_Args&&... __args)
+      160:  633:	_M_create_node(_Args&&... __args)
         -:  634:	{
-       40:  635:	  auto __p = this->_M_get_node();
-       40:  636:	  auto& __alloc = _M_get_Node_allocator();
-       40:  637:	  __allocated_ptr<_Node_alloc_type> __guard{__alloc, __p};
-       40:  638:	  _Node_alloc_traits::construct(__alloc, __p->_M_valptr(),
+      160:  635:	  auto __p = this->_M_get_node();
+      160:  636:	  auto& __alloc = _M_get_Node_allocator();
+      160:  637:	  __allocated_ptr<_Node_alloc_type> __guard{__alloc, __p};
+      160:  638:	  _Node_alloc_traits::construct(__alloc, __p->_M_valptr(),
         -:  639:					std::forward<_Args>(__args)...);
-       40:  640:	  __guard = nullptr;
-       40:  641:	  return __p;
-       40:  642:	}
+      160:  640:	  __guard = nullptr;
+      160:  641:	  return __p;
+      160:  642:	}
         -:  643:#endif
         -:  644:
         -:  645:#if _GLIBCXX_USE_CXX11_ABI
@@ -653,8 +653,8 @@
         -:  649:
         -:  650:      // return the stored size
         -:  651:      size_t
-        5:  652:      _M_node_count() const
-        5:  653:      { return this->_M_get_size(); }
+       20:  652:      _M_node_count() const
+       20:  653:      { return this->_M_get_size(); }
         -:  654:#else
         -:  655:      // dummy implementations used when the size is not stored
         -:  656:      static size_t
@@ -675,7 +675,7 @@
         -:  671:       *  @brief  Creates a %list with no elements.
         -:  672:       */
         -:  673:#if __cplusplus >= 201103L
-        5:  674:      list() = default;
+       20:  674:      list() = default;
         -:  675:#else
         -:  676:      list() { }
         -:  677:#endif
@@ -685,8 +685,8 @@
         -:  681:       *  @param  __a  An allocator object.
         -:  682:       */
         -:  683:      explicit
-       20:  684:      list(const allocator_type& __a) _GLIBCXX_NOEXCEPT
-       20:  685:      : _Base(_Node_alloc_type(__a)) { }
+       80:  684:      list(const allocator_type& __a) _GLIBCXX_NOEXCEPT
+       80:  685:      : _Base(_Node_alloc_type(__a)) { }
         -:  686:
         -:  687:#if __cplusplus >= 201103L
         -:  688:      /**
@@ -737,10 +737,10 @@
         -:  733:       *  The newly-created %list uses a copy of the allocation object used
         -:  734:       *  by @a __x (unless the allocator traits dictate a different object).
         -:  735:       */
-        5:  736:      list(const list& __x)
+       20:  736:      list(const list& __x)
         -:  737:      : _Base(_Node_alloc_traits::
-        5:  738:	      _S_select_on_copy(__x._M_get_Node_allocator()))
-        5:  739:      { _M_initialize_dispatch(__x.begin(), __x.end(), __false_type()); }
+       20:  738:	      _S_select_on_copy(__x._M_get_Node_allocator()))
+       20:  739:      { _M_initialize_dispatch(__x.begin(), __x.end(), __false_type()); }
         -:  740:
         -:  741:#if __cplusplus >= 201103L
         -:  742:      /**
@@ -829,7 +829,7 @@
         -:  825:       *  memory is not touched in any way.  Managing the pointer is
         -:  826:       *  the user's responsibility.
         -:  827:       */
-       30:  828:      ~list() = default;
+      120:  828:      ~list() = default;
         -:  829:#endif
         -:  830:
         -:  831:      /**
@@ -938,8 +938,8 @@
         -:  934:
         -:  935:      /// Get a copy of the memory allocation object.
         -:  936:      allocator_type
-       20:  937:      get_allocator() const _GLIBCXX_NOEXCEPT
-       20:  938:      { return allocator_type(_Base::_M_get_Node_allocator()); }
+       80:  937:      get_allocator() const _GLIBCXX_NOEXCEPT
+       80:  938:      { return allocator_type(_Base::_M_get_Node_allocator()); }
         -:  939:
         -:  940:      // iterators
         -:  941:      /**
@@ -947,8 +947,8 @@
         -:  943:       *  %list.  Iteration is done in ordinary element order.
         -:  944:       */
         -:  945:      iterator
-       80:  946:      begin() _GLIBCXX_NOEXCEPT
-       80:  947:      { return iterator(this->_M_impl._M_node._M_next); }
+      320:  946:      begin() _GLIBCXX_NOEXCEPT
+      320:  947:      { return iterator(this->_M_impl._M_node._M_next); }
         -:  948:
         -:  949:      /**
         -:  950:       *  Returns a read-only (constant) iterator that points to the
@@ -956,8 +956,8 @@
         -:  952:       *  element order.
         -:  953:       */
         -:  954:      const_iterator
-       10:  955:      begin() const _GLIBCXX_NOEXCEPT
-       10:  956:      { return const_iterator(this->_M_impl._M_node._M_next); }
+       40:  955:      begin() const _GLIBCXX_NOEXCEPT
+       40:  956:      { return const_iterator(this->_M_impl._M_node._M_next); }
         -:  957:
         -:  958:      /**
         -:  959:       *  Returns a read/write iterator that points one past the last
@@ -965,8 +965,8 @@
         -:  961:       *  order.
         -:  962:       */
         -:  963:      iterator
-      135:  964:      end() _GLIBCXX_NOEXCEPT
-      135:  965:      { return iterator(&this->_M_impl._M_node); }
+      540:  964:      end() _GLIBCXX_NOEXCEPT
+      540:  965:      { return iterator(&this->_M_impl._M_node); }
         -:  966:
         -:  967:      /**
         -:  968:       *  Returns a read-only (constant) iterator that points one past
@@ -974,8 +974,8 @@
         -:  970:       *  element order.
         -:  971:       */
         -:  972:      const_iterator
-       10:  973:      end() const _GLIBCXX_NOEXCEPT
-       10:  974:      { return const_iterator(&this->_M_impl._M_node); }
+       40:  973:      end() const _GLIBCXX_NOEXCEPT
+       40:  974:      { return const_iterator(&this->_M_impl._M_node); }
         -:  975:
         -:  976:      /**
         -:  977:       *  Returns a read/write reverse iterator that points to the last
@@ -1057,13 +1057,13 @@
         -: 1053:       *  end().)
         -: 1054:       */
         -: 1055:      _GLIBCXX_NODISCARD bool
-       27: 1056:      empty() const _GLIBCXX_NOEXCEPT
-       27: 1057:      { return this->_M_impl._M_node._M_next == &this->_M_impl._M_node; }
+      108: 1056:      empty() const _GLIBCXX_NOEXCEPT
+      108: 1057:      { return this->_M_impl._M_node._M_next == &this->_M_impl._M_node; }
         -: 1058:
         -: 1059:      /**  Returns the number of elements in the %list.  */
         -: 1060:      size_type
-        5: 1061:      size() const _GLIBCXX_NOEXCEPT
-        5: 1062:      { return _M_node_count(); }
+       20: 1061:      size() const _GLIBCXX_NOEXCEPT
+       20: 1062:      { return _M_node_count(); }
         -: 1063:
         -: 1064:      /**  Returns the size() of the largest possible %list.  */
         -: 1065:      size_type
@@ -1116,8 +1116,8 @@
         -: 1112:       *  element of the %list.
         -: 1113:       */
         -: 1114:      reference
-       10: 1115:      front() _GLIBCXX_NOEXCEPT
-       10: 1116:      { return *begin(); }
+       40: 1115:      front() _GLIBCXX_NOEXCEPT
+       40: 1116:      { return *begin(); }
         -: 1117:
         -: 1118:      /**
         -: 1119:       *  Returns a read-only (constant) reference to the data at the first
@@ -1132,11 +1132,11 @@
         -: 1128:       *  of the %list.
         -: 1129:       */
         -: 1130:      reference
-       20: 1131:      back() _GLIBCXX_NOEXCEPT
+       80: 1131:      back() _GLIBCXX_NOEXCEPT
         -: 1132:      {
-       20: 1133:	iterator __tmp = end();
-       20: 1134:	--__tmp;
-       20: 1135:	return *__tmp;
+       80: 1133:	iterator __tmp = end();
+       80: 1134:	--__tmp;
+       80: 1135:	return *__tmp;
         -: 1136:      }
         -: 1137:
         -: 1138:      /**
@@ -1213,8 +1213,8 @@
         -: 1209:       *  references.
         -: 1210:       */
         -: 1211:      void
-       20: 1212:      push_back(const value_type& __x)
-       20: 1213:      { this->_M_insert(end(), __x); }
+       80: 1212:      push_back(const value_type& __x)
+       80: 1213:      { this->_M_insert(end(), __x); }
         -: 1214:
         -: 1215:#if __cplusplus >= 201103L
         -: 1216:      void
@@ -1227,11 +1227,11 @@
         -: 1223:#else
         -: 1224:	void
         -: 1225:#endif
-       20: 1226:	emplace_back(_Args&&... __args)
+       80: 1226:	emplace_back(_Args&&... __args)
         -: 1227:	{
-       20: 1228:	  this->_M_insert(end(), std::forward<_Args>(__args)...);
+       80: 1228:	  this->_M_insert(end(), std::forward<_Args>(__args)...);
         -: 1229:#if __cplusplus > 201402L
-       20: 1230:	return back();
+       80: 1230:	return back();
         -: 1231:#endif
         -: 1232:	}
         -: 1233:#endif
@@ -1555,7 +1555,7 @@
         -: 1551:       *  inserts it into the current list before @a __position.
         -: 1552:       */
         -: 1553:      void
-       20: 1554:      splice(const_iterator __position, list&& __x, const_iterator __i) noexcept
+       80: 1554:      splice(const_iterator __position, list&& __x, const_iterator __i) noexcept
         -: 1555:#else
         -: 1556:      /**
         -: 1557:       *  @brief  Insert element from another %list.
@@ -1570,19 +1570,19 @@
         -: 1566:      splice(iterator __position, list& __x, iterator __i)
         -: 1567:#endif
         -: 1568:      {
-       20: 1569:	iterator __j = __i._M_const_cast();
-       20: 1570:	++__j;
-      20*: 1571:	if (__position == __i || __position == __j)
+       80: 1569:	iterator __j = __i._M_const_cast();
+       80: 1570:	++__j;
+      80*: 1571:	if (__position == __i || __position == __j)
     #####: 1572:	  return;
         -: 1573:
-       20: 1574:	if (this != std::__addressof(__x))
-       20: 1575:	  _M_check_equal_allocators(__x);
+       80: 1574:	if (this != std::__addressof(__x))
+       80: 1575:	  _M_check_equal_allocators(__x);
         -: 1576:
-       20: 1577:	this->_M_transfer(__position._M_const_cast(),
+       80: 1577:	this->_M_transfer(__position._M_const_cast(),
         -: 1578:			  __i._M_const_cast(), __j);
         -: 1579:
-       20: 1580:	this->_M_inc_size(1);
-       20: 1581:	__x._M_dec_size(1);
+       80: 1580:	this->_M_inc_size(1);
+       80: 1581:	__x._M_dec_size(1);
         -: 1582:      }
         -: 1583:
         -: 1584:#if __cplusplus >= 201103L
@@ -1597,8 +1597,8 @@
         -: 1593:       *  inserts it into the current list before @a __position.
         -: 1594:       */
         -: 1595:      void
-       20: 1596:      splice(const_iterator __position, list& __x, const_iterator __i) noexcept
-       20: 1597:      { splice(__position, std::move(__x), __i); }
+       80: 1596:      splice(const_iterator __position, list& __x, const_iterator __i) noexcept
+       80: 1597:      { splice(__position, std::move(__x), __i); }
         -: 1598:#endif
         -: 1599:
         -: 1600:#if __cplusplus >= 201103L
@@ -1837,16 +1837,16 @@
         -: 1833:      // Called by the range constructor to implement [23.1.1]/9
         -: 1834:      template<typename _InputIterator>
         -: 1835:	void
-        5: 1836:	_M_initialize_dispatch(_InputIterator __first, _InputIterator __last,
+       20: 1836:	_M_initialize_dispatch(_InputIterator __first, _InputIterator __last,
         -: 1837:			       __false_type)
         -: 1838:	{
-       25: 1839:	  for (; __first != __last; ++__first)
+      100: 1839:	  for (; __first != __last; ++__first)
         -: 1840:#if __cplusplus >= 201103L
-       20: 1841:	    emplace_back(*__first);
+       80: 1841:	    emplace_back(*__first);
         -: 1842:#else
         -: 1843:	    push_back(*__first);
         -: 1844:#endif
-        5: 1845:	}
+       20: 1845:	}
         -: 1846:
         -: 1847:      // Called by list(n,v,a), and the range constructor when it turns out
         -: 1848:      // to be the same thing.
@@ -1896,8 +1896,8 @@
         -: 1892:
         -: 1893:      // Moves the elements from [first,last) before position.
         -: 1894:      void
-       20: 1895:      _M_transfer(iterator __position, iterator __first, iterator __last)
-       20: 1896:      { __position._M_node->_M_transfer(__first._M_node, __last._M_node); }
+       80: 1895:      _M_transfer(iterator __position, iterator __first, iterator __last)
+       80: 1896:      { __position._M_node->_M_transfer(__first._M_node, __last._M_node); }
         -: 1897:
         -: 1898:      // Inserts new element at position given and with value given.
         -: 1899:#if __cplusplus < 201103L
@@ -1911,12 +1911,12 @@
         -: 1907:#else
         -: 1908:     template<typename... _Args>
         -: 1909:       void
-       40: 1910:       _M_insert(iterator __position, _Args&&... __args)
+      160: 1910:       _M_insert(iterator __position, _Args&&... __args)
         -: 1911:       {
-       40: 1912:	 _Node* __tmp = _M_create_node(std::forward<_Args>(__args)...);
-       40: 1913:	 __tmp->_M_hook(__position._M_node);
-       40: 1914:	 this->_M_inc_size(1);
-       40: 1915:       }
+      160: 1912:	 _Node* __tmp = _M_create_node(std::forward<_Args>(__args)...);
+      160: 1913:	 __tmp->_M_hook(__position._M_node);
+      160: 1914:	 this->_M_inc_size(1);
+      160: 1915:       }
         -: 1916:#endif
         -: 1917:
         -: 1918:      // Erases element at position given.
@@ -1937,12 +1937,12 @@
         -: 1933:
         -: 1934:      // To implement the splice (and merge) bits of N1599.
         -: 1935:      void
-       20: 1936:      _M_check_equal_allocators(list& __x) _GLIBCXX_NOEXCEPT
+       80: 1936:      _M_check_equal_allocators(list& __x) _GLIBCXX_NOEXCEPT
         -: 1937:      {
-       20: 1938:	if (std::__alloc_neq<typename _Base::_Node_alloc_type>::
-       20: 1939:	    _S_do_it(_M_get_Node_allocator(), __x._M_get_Node_allocator()))
+       80: 1938:	if (std::__alloc_neq<typename _Base::_Node_alloc_type>::
+       80: 1939:	    _S_do_it(_M_get_Node_allocator(), __x._M_get_Node_allocator()))
     #####: 1940:	  __builtin_abort();
-       20: 1941:      }
+       80: 1941:      }
         -: 1942:
         -: 1943:      // Used to implement resize.
         -: 1944:      const_iterator

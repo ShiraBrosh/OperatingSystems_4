@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/move.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Move, forward and identity for C++11 + swap -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2007-2021 Free Software Foundation, Inc.
@@ -50,20 +50,20 @@
         -:   46:   */
         -:   47:  template<typename _Tp>
         -:   48:    inline _GLIBCXX_CONSTEXPR _Tp*
-       83:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-       83:   50:    { return __builtin_addressof(__r); }
+      332:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+      332:   50:    { return __builtin_addressof(__r); }
 ------------------
 _ZSt11__addressofISaISt10_List_nodeIiEEEPT_RS3_:
-       40:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-       40:   50:    { return __builtin_addressof(__r); }
+      160:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+      160:   50:    { return __builtin_addressof(__r); }
 ------------------
 _ZSt11__addressofINSt7__cxx114listIiSaIiEEEEPT_RS4_:
-       40:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-       40:   50:    { return __builtin_addressof(__r); }
+      160:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+      160:   50:    { return __builtin_addressof(__r); }
 ------------------
 _ZSt11__addressofImEPT_RS0_:
-        3:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
-        3:   50:    { return __builtin_addressof(__r); }
+       12:   49:    __addressof(_Tp& __r) _GLIBCXX_NOEXCEPT
+       12:   50:    { return __builtin_addressof(__r); }
 ------------------
         -:   51:
         -:   52:#if __cplusplus >= 201103L
@@ -91,20 +91,20 @@ _ZSt11__addressofImEPT_RS0_:
         -:   74:  template<typename _Tp>
         -:   75:    _GLIBCXX_NODISCARD
         -:   76:    constexpr _Tp&&
-     234*:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-     234*:   78:    { return static_cast<_Tp&&>(__t); }
+     936*:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+     936*:   78:    { return static_cast<_Tp&&>(__t); }
 ------------------
 _ZSt7forwardINSt7__cxx114listIiSaIiEEEEOT_RNSt16remove_referenceIS4_E4typeE:
     #####:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
     #####:   78:    { return static_cast<_Tp&&>(__t); }
 ------------------
 _ZSt7forwardIRKNSt7__cxx114listIiSaIiEEEEOT_RNSt16remove_referenceIS6_E4typeE:
-        5:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-        5:   78:    { return static_cast<_Tp&&>(__t); }
+       20:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+       20:   78:    { return static_cast<_Tp&&>(__t); }
 ------------------
 _ZSt7forwardIRKiEOT_RNSt16remove_referenceIS2_E4typeE:
-      229:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-      229:   78:    { return static_cast<_Tp&&>(__t); }
+      916:   77:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+      916:   78:    { return static_cast<_Tp&&>(__t); }
 ------------------
         -:   79:
         -:   80:  /**
@@ -131,16 +131,16 @@ _ZSt7forwardIRKiEOT_RNSt16remove_referenceIS2_E4typeE:
         -:  101:  template<typename _Tp>
         -:  102:    _GLIBCXX_NODISCARD
         -:  103:    constexpr typename std::remove_reference<_Tp>::type&&
-       70:  104:    move(_Tp&& __t) noexcept
-       70:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+      280:  104:    move(_Tp&& __t) noexcept
+      280:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
 ------------------
 _ZSt4moveIRSaISt10_List_nodeIiEEEONSt16remove_referenceIT_E4typeEOS5_:
-       50:  104:    move(_Tp&& __t) noexcept
-       50:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+      200:  104:    move(_Tp&& __t) noexcept
+      200:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
 ------------------
 _ZSt4moveIRNSt7__cxx114listIiSaIiEEEEONSt16remove_referenceIT_E4typeEOS6_:
-       20:  104:    move(_Tp&& __t) noexcept
-       20:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+       80:  104:    move(_Tp&& __t) noexcept
+       80:  105:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
 ------------------
         -:  106:
         -:  107:

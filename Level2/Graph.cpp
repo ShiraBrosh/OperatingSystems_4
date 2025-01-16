@@ -43,7 +43,7 @@ void Graph::printGraph() const {
         std::cout << "Vertex " << i << ":";
         for (auto v : adjList[i]) {
             std::cout << " -> " << v;
-        }
+        }/
         std::cout << std::endl;
     }
 }

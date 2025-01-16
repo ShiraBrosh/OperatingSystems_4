@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/11/bits/stl_iterator_base_types.h
         -:    0:Graph:Graph.gcno
         -:    0:Data:Graph.gcda
-        -:    0:Runs:1
+        -:    0:Runs:4
         -:    1:// Types used in iterator implementation -*- C++ -*-
         -:    2:
         -:    3:// Copyright (C) 2001-2021 Free Software Foundation, Inc.
@@ -239,16 +239,16 @@
         -:  235:  template<typename _Iter>
         -:  236:    inline _GLIBCXX_CONSTEXPR
         -:  237:    typename iterator_traits<_Iter>::iterator_category
-       28:  238:    __iterator_category(const _Iter&)
-       28:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
+      112:  238:    __iterator_category(const _Iter&)
+      112:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
 ------------------
 _ZSt19__iterator_categoryIPKcENSt15iterator_traitsIT_E17iterator_categoryERKS3_:
-        3:  238:    __iterator_category(const _Iter&)
-        3:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
+       12:  238:    __iterator_category(const _Iter&)
+       12:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
 ------------------
 _ZSt19__iterator_categoryISt14_List_iteratorIiEENSt15iterator_traitsIT_E17iterator_categoryERKS3_:
-       25:  238:    __iterator_category(const _Iter&)
-       25:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
+      100:  238:    __iterator_category(const _Iter&)
+      100:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
 ------------------
         -:  240:
         -:  241:  ///@}
